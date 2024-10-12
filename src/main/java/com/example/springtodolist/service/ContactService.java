@@ -2,6 +2,7 @@ package com.example.springtodolist.service;
 
 import com.example.springtodolist.model.Contact;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface ContactService {

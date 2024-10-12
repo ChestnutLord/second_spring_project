@@ -1,4 +1,4 @@
-package com.example.springtodolist.Impl;
+package com.example.springtodolist.impl;
 
 import com.example.springtodolist.model.Contact;
 import com.example.springtodolist.repositiry.ContactRepository;
@@ -13,33 +13,34 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @Primary
-
 public class ContactServiceImpl implements ContactService {
 
-    private final ContactRepository REPOSITORY;
+    private final ContactRepository repository;
+
     @Override
     public List<Contact> getAllContacts() {
-        return REPOSITORY.findAll();
+        return repository.findAll();
     }
 
     @Override
     public Contact getByNumber(String number) {
-        return REPOSITORY.findStudentByNumber(number);
+        return repository.findStudentByNumber(number);
     }
 
     @Override
     public Contact saveContact(Contact contact) {
-        return REPOSITORY.save(contact);
+        return repository.save(contact);
     }
 
     @Override
     public Contact updateContact(Contact contact) {
-        return REPOSITORY.save(contact);
+        return repository.save(contact);
     }
 
     @Override
     @Transactional
     public void deleteContact(String number) {
-        REPOSITORY.deleteByNumber(number);
+        repository.deleteByNumber(number);
     }
+
 }

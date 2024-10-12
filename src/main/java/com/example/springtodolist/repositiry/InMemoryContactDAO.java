@@ -9,26 +9,28 @@ import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryContactDAO {
-    private final List<Contact> CONTACTS  =new ArrayList<>();
 
-    public List<Contact> getAllContact(){
+    private final List<Contact> CONTACTS = new ArrayList<>();
+
+    public List<Contact> getAllContact() {
         return CONTACTS;
     }
-    public Contact findByNumber(String number){
+
+    public Contact findByNumber(String number) {
         return CONTACTS.stream().
-                filter(element->element.getNumber().equals(number))
+                filter(element -> element.getNumber().equals(number))
                 .findFirst()
                 .orElse(null);
     }
 
-    public Contact saveContact(Contact contact){
+    public Contact saveContact(Contact contact) {
         CONTACTS.add(contact);
         System.out.println("Контакт добвавлен");
         return contact;
     }
 
-    public Contact updateContact(Contact contact){
-        var contactIndex= IntStream.range(0, CONTACTS.size())
+    public Contact updateContact(Contact contact) {
+        var contactIndex = IntStream.range(0, CONTACTS.size())
                 .filter(index -> CONTACTS.get(index).getId().equals(contact.getId()))
                 .findFirst()
                 .orElse(-1);
@@ -38,9 +40,9 @@ public class InMemoryContactDAO {
         return contact;
     }
 
-    public void deleteContact(String number){
-        var contact=findByNumber(number);
-        if(contact!=null){
+    public void deleteContact(String number) {
+        var contact = findByNumber(number);
+        if (contact != null) {
             CONTACTS.remove(contact);
             System.out.println("Контакт удалён");
         }

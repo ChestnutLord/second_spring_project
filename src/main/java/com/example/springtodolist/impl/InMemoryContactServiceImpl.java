@@ -1,10 +1,9 @@
-package com.example.springtodolist.Impl;
+package com.example.springtodolist.impl;
 
 import com.example.springtodolist.model.Contact;
 import com.example.springtodolist.repositiry.InMemoryContactDAO;
 import com.example.springtodolist.service.ContactService;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -19,9 +18,7 @@ public class InMemoryContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getByNumber(String number) {
-        return REPOSITORY.findByNumber(number);
-    }
+    public Contact getByNumber(String number) {return REPOSITORY.findByNumber(number);}
 
     @Override
     public Contact saveContact(Contact contact) {
@@ -37,4 +34,5 @@ public class InMemoryContactServiceImpl implements ContactService {
     public void deleteContact(String number) {
         REPOSITORY.deleteContact(number);
     }
+
 }

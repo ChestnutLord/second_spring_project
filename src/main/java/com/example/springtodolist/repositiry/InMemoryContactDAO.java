@@ -9,11 +9,13 @@ import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryContactDAO {
+
     private final List<Contact> CONTACTS  =new ArrayList<>();
 
     public List<Contact> getAllContact(){
         return CONTACTS;
     }
+
     public Contact findByNumber(String number){
         return CONTACTS.stream().
                 filter(element->element.getNumber().equals(number))

@@ -3,8 +3,10 @@ package com.example.springtodolist.repositiry;
 import com.example.springtodolist.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ContactRepositoryDB extends JpaRepository<Contact, Long> {
+import java.util.Optional;
+
+public interface ContactRepositoryDB extends JpaRepository<Contact, Long>,ContactRepository {
     void deleteByNumber(String number);
 
-    Contact findStudentByNumber(String email);
+    Optional<Contact> findContactByNumber(String email);
 }

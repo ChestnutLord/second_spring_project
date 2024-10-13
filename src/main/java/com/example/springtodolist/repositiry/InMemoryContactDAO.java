@@ -60,9 +60,8 @@ public class InMemoryContactDAO implements ContactRepository {
 
     @Override
     public Optional<Contact> findContactByNumber(String number) {
-        return Optional.ofNullable(contacts.stream().
+        return contacts.stream().
                 filter(element -> element.getNumber().equals(number))
-                .findFirst()
-                .orElse(null));
+                .findFirst();
     }
 }

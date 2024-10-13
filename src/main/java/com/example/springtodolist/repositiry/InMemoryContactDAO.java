@@ -17,36 +17,27 @@ public class InMemoryContactDAO implements ContactRepository {
         return contacts;
     }
 
-    public Contact findByNumber(String number) {
+    @Override
+    public Optional<Contact> findContactByNumber(String number) {
         return contacts.stream().
                 filter(element -> element.getNumber().equals(number))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     public Contact saveContact(Contact contact) {
         contacts.add(contact);
-        System.out.println("Контакт добвавлен");
         return contact;
     }
 
-    public Contact updateContact(Contact contact) {
+    public Optional<Contact> updateContact(Contact contact) {
         var contactIndex = IntStream.range(0, contacts.size())
                 .filter(index -> contacts.get(index).getId().equals(contact.getId()))
                 .findFirst()
                 .orElse(-1);
         if (contactIndex > -1) {
-            CONTACTS.set(contactIndex, contact);
+            contacts.set(contactIndex, contact);
         }
-        return contact;
-    }
-
-    public void deleteContact(String number) {
-        var contact = findByNumber(number);
-        if (contact != null) {
-            contacts.remove(contact);
-            System.out.println("Контакт удалён");
-        }
+        return Optional.of(contact);
     }
 
     @Override
@@ -54,14 +45,6 @@ public class InMemoryContactDAO implements ContactRepository {
         var contact = findContactByNumber(number);
         if (contact != null) {
             contacts.remove(contact);
-            System.out.println("Контакт удалён");
         }
-    }
-
-    @Override
-    public Optional<Contact> findContactByNumber(String number) {
-        return contacts.stream().
-                filter(element -> element.getNumber().equals(number))
-                .findFirst();
     }
 }

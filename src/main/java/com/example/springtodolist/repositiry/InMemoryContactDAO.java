@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Repository
-public class InMemoryContactDAO implements ContactRepository{
+public class InMemoryContactDAO implements ContactRepository {
 
     private final List<Contact> contacts = new ArrayList<>();
 

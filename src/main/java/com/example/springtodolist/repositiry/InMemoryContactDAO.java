@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Repository
-public class InMemoryContactDAO {
+public class InMemoryContactDAO implements ContactRepository{
 
     private final List<Contact> CONTACTS = new ArrayList<>();
 
@@ -48,4 +49,13 @@ public class InMemoryContactDAO {
         }
     }
 
+    @Override
+    public void deleteByNumber(String number) {
+
+    }
+
+    @Override
+    public Optional<Contact> findContactByNumber(String email) {
+        return Optional.empty();
+    }
 }

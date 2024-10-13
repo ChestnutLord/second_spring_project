@@ -9,27 +9,42 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Repository
-public class InMemoryContactDAO implements ContactRepository {
-
+public class InMemoryContactRepository implements ContactRepository {
     private final List<Contact> contacts = new ArrayList<>();
 
-    public List<Contact> getAllContact() {
+    @Override
+    public List<Contact> findAll() {
         return contacts;
     }
 
     @Override
-    public Optional<Contact> findContactByNumber(String number) {
+    public Optional<Contact> findByNumber(String number) {
         return contacts.stream().
                 filter(element -> element.getNumber().equals(number))
                 .findFirst();
     }
 
-    public Contact saveContact(Contact contact) {
+    @Override
+    public Contact save(Contact contact) {
         contacts.add(contact);
         return contact;
     }
 
-    public Optional<Contact> updateContact(Contact contact) {
+    @Override
+    public Contact findById(long id) {
+        return contacts.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElse(null); //TODO
+    }
+
+    @Override
+    public void deleteByNumber(String number) {
+        findByNumber(number)
+                .ifPresent(contacts::remove);
+    }
+
+    public Optional<Contact> updateContactById(Contact contact) {
         var contactIndex = IntStream.range(0, contacts.size())
                 .filter(index -> contacts.get(index).getId().equals(contact.getId()))
                 .findFirst()
@@ -40,11 +55,4 @@ public class InMemoryContactDAO implements ContactRepository {
         return Optional.of(contact);
     }
 
-    @Override
-    public void deleteByNumber(String number) {
-        var contact = findContactByNumber(number);
-        if (contact != null) {
-            contacts.remove(contact);
-        }
-    }
 }

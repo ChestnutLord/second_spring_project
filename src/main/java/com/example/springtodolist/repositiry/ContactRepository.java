@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface ContactRepository {
     void deleteByNumber(String number);
 
-    Optional<Contact> findContactByNumber(String email);
+    Optional<Contact> findContactByNumber(String number);
 }

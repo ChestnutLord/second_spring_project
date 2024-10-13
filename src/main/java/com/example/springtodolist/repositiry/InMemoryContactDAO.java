@@ -11,28 +11,28 @@ import java.util.stream.IntStream;
 @Repository
 public class InMemoryContactDAO implements ContactRepository{
 
-    private final List<Contact> CONTACTS = new ArrayList<>();
+    private final List<Contact> contacts = new ArrayList<>();
 
     public List<Contact> getAllContact() {
-        return CONTACTS;
+        return contacts;
     }
 
     public Contact findByNumber(String number) {
-        return CONTACTS.stream().
+        return contacts.stream().
                 filter(element -> element.getNumber().equals(number))
                 .findFirst()
                 .orElse(null);
     }
 
     public Contact saveContact(Contact contact) {
-        CONTACTS.add(contact);
+        contacts.add(contact);
         System.out.println("Контакт добвавлен");
         return contact;
     }
 
     public Contact updateContact(Contact contact) {
-        var contactIndex = IntStream.range(0, CONTACTS.size())
-                .filter(index -> CONTACTS.get(index).getId().equals(contact.getId()))
+        var contactIndex = IntStream.range(0, contacts.size())
+                .filter(index -> contacts.get(index).getId().equals(contact.getId()))
                 .findFirst()
                 .orElse(-1);
         if (contactIndex > -1) {
@@ -44,18 +44,25 @@ public class InMemoryContactDAO implements ContactRepository{
     public void deleteContact(String number) {
         var contact = findByNumber(number);
         if (contact != null) {
-            CONTACTS.remove(contact);
+            contacts.remove(contact);
             System.out.println("Контакт удалён");
         }
     }
 
     @Override
     public void deleteByNumber(String number) {
-
+        var contact = findContactByNumber(number);
+        if (contact != null) {
+            contacts.remove(contact);
+            System.out.println("Контакт удалён");
+        }
     }
 
     @Override
-    public Optional<Contact> findContactByNumber(String email) {
-        return Optional.empty();
+    public Optional<Contact> findContactByNumber(String number) {
+        return Optional.ofNullable(contacts.stream().
+                filter(element -> element.getNumber().equals(number))
+                .findFirst()
+                .orElse(null));
     }
 }

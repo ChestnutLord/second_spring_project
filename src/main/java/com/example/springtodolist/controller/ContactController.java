@@ -1,7 +1,6 @@
 package com.example.springtodolist.controller;
 
 import com.example.springtodolist.model.Contact;
-import com.example.springtodolist.service.ContactService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

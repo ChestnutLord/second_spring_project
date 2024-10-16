@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryContactRepository implements ContactRepository {
@@ -26,16 +25,16 @@ public class InMemoryContactRepository implements ContactRepository {
 
     @Override
     public Contact save(Contact contact) {
+        contact.setId((long)(contacts.size()+1));
         contacts.add(contact);
         return contact;
     }
 
     @Override
-    public Contact findById(long id) {
+    public Optional<Contact> findById(long id) {
         return contacts.stream()
                 .filter(c -> c.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override

@@ -29,15 +29,14 @@ public class ContactService {
     }
 
     public Contact updateContact(long id, Contact updatedContact) {
-        Contact contact = repository.findById(id);
-        if (contact != null) {
-            contact.setName(updatedContact.getName());
-            contact.setNumber(updatedContact.getNumber());
-            contact.setAddress(updatedContact.getAddress());
-            return repository.save(contact);
-        } else {
-            throw new EntityNotFoundException("Contact not found with id " + updatedContact.getId());
-        }
+        return repository.findById(id)
+                .map(contact -> {
+                    contact.setName(updatedContact.getName());
+                    contact.setNumber(updatedContact.getNumber());
+                    contact.setAddress(updatedContact.getAddress());
+                    return repository.save(contact);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Contact not found with id " + id));
     }
 
     @Transactional
@@ -45,4 +44,5 @@ public class ContactService {
     public void deleteContact(String number) {
         repository.deleteByNumber(number);
     }
+
 }

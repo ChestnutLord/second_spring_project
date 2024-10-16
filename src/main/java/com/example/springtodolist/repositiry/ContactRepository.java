@@ -13,7 +13,7 @@ public interface ContactRepository {
 
     Contact save(Contact contact);
 
-    Contact findById(long id);
+    Optional<Contact> findById(long id);
 
     void deleteByNumber(String number);
 

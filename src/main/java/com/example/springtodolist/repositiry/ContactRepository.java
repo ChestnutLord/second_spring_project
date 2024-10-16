@@ -15,8 +15,6 @@ public interface ContactRepository {
 
     Contact findById(long id);
 
-//    Optional<Contact> updateContactById(Contact contact);
-
     void deleteByNumber(String number);
 
 }

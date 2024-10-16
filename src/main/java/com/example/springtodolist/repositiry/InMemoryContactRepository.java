@@ -46,15 +46,4 @@ public class InMemoryContactRepository implements ContactRepository {
         contacts.remove(contact);
     }
 
-    public Optional<Contact> updateContactById(Contact contact) {
-        var contactIndex = IntStream.range(0, contacts.size())
-                .filter(index -> contacts.get(index).getId().equals(contact.getId()))
-                .findFirst()
-                .orElse(-1);
-        if (contactIndex > -1) {
-            contacts.set(contactIndex, contact);
-        }
-        return Optional.of(contact);
-    }
-
 }

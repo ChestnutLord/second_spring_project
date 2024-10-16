@@ -11,8 +11,4 @@ import java.util.Optional;
 @Repository
 public interface DBContactRepository extends JpaRepository<Contact, Long>, ContactRepository {
 
-    Optional<Contact> findByNumber(String number);
-
-    void deleteByNumber(String number);
-
 }

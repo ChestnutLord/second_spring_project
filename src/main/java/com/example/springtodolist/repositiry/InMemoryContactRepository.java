@@ -35,13 +35,15 @@ public class InMemoryContactRepository implements ContactRepository {
         return contacts.stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()
-                .orElse(null); //TODO
+                .orElse(null);
     }
 
     @Override
     public void deleteByNumber(String number) {
-        findByNumber(number)
-                .ifPresent(contacts::remove);
+        Contact contact = findByNumber(number)
+                .orElseThrow(() -> new IllegalArgumentException("Contact with number " + number + " not found"));
+
+        contacts.remove(contact);
     }
 
     public Optional<Contact> updateContactById(Contact contact) {

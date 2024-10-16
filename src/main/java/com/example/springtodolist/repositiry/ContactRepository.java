@@ -5,7 +5,7 @@ import com.example.springtodolist.model.Contact;
 import java.util.List;
 import java.util.Optional;
 
-public interface ContactRepository { //TODO
+public interface ContactRepository {
 
     List<Contact> findAll();
 

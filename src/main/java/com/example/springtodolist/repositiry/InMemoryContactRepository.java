@@ -30,6 +30,7 @@ public class InMemoryContactRepository implements ContactRepository {
         return contact;
     }
 
+
     @Override
     public Optional<Contact> findById(long id) {
         return contacts.stream()

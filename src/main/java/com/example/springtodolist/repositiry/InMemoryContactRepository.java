@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public class InMemoryContactRepository implements ContactRepository {
+    long id=0;
     private final List<Contact> contacts = new ArrayList<>();
 
     @Override
@@ -17,15 +18,9 @@ public class InMemoryContactRepository implements ContactRepository {
     }
 
     @Override
-    public Optional<Contact> findByNumber(String number) {
-        return contacts.stream().
-                filter(element -> element.getNumber().equals(number))
-                .findFirst();
-    }
-
-    @Override
     public Contact save(Contact contact) {
-        contact.setId((long)(contacts.size()+1));
+        id++;
+        contact.setId(id);
         contacts.add(contact);
         return contact;
     }
@@ -39,9 +34,9 @@ public class InMemoryContactRepository implements ContactRepository {
     }
 
     @Override
-    public void deleteByNumber(String number) {
-        Contact contact = findByNumber(number)
-                .orElseThrow(() -> new IllegalArgumentException("Contact with number " + number + " not found"));
+    public void deleteById(long id) {
+        Contact contact = findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Contact with id " + id + " not found"));
 
         contacts.remove(contact);
     }

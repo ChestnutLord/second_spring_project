@@ -20,8 +20,8 @@ public class ContactService {
         return repository.findAll();
     }
 
-    public Optional<Contact> findByNumber(String number) {
-        return repository.findByNumber(number);
+    public Optional<Contact> findById(long id) {
+        return repository.findById(id);
     }
 
     public Contact saveContact(Contact contact) {
@@ -41,8 +41,8 @@ public class ContactService {
 
     @Transactional
     // без аннотации не работалло
-    public void deleteContact(String number) {
-        repository.deleteByNumber(number);
+    public void deleteContact(long id) {
+        repository.deleteById(id);
     }
 
 }

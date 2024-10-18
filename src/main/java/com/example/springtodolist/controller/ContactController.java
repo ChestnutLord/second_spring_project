@@ -20,9 +20,9 @@ public class ContactController {
         return service.findAllContacts();
     }
 
-    @GetMapping("/{number}")
-    public Optional<Contact> findByNumber(@PathVariable String number) {
-        return service.findByNumber(number);
+    @GetMapping("/{id}")
+    public Optional<Contact> findByNumber(@PathVariable long id) {
+        return service.findById(id);
     }
 
     @PostMapping
@@ -35,9 +35,9 @@ public class ContactController {
         return service.updateContact(id, contact);
     }
 
-    @DeleteMapping("/{number}")
-    public void deleteContact(@PathVariable String number) {
-        service.deleteContact(number);
+    @DeleteMapping("/{id}")
+    public void deleteContact(@PathVariable long id) {
+        service.deleteContact(id);
     }
 
 }

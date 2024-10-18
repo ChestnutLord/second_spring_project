@@ -9,12 +9,10 @@ public interface ContactRepository {
 
     List<Contact> findAll();
 
-    Optional<Contact> findByNumber(String number);
-
     Contact save(Contact contact);
 
     Optional<Contact> findById(long id);
 
-    void deleteByNumber(String number);
+    void deleteById(long id);
 
 }

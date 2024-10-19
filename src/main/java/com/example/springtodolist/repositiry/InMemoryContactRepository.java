@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public class InMemoryContactRepository implements ContactRepository {
-    long id=0;
+    private long id=0;
     private final List<Contact> contacts = new ArrayList<>();
 
     @Override

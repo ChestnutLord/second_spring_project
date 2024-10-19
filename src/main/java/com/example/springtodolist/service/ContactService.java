@@ -20,8 +20,9 @@ public class ContactService {
         return repository.findAll();
     }
 
-    public Optional<Contact> findById(long id) {
-        return repository.findById(id);
+    public Contact findById(long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contact not found with id: " + id));
     }
 
     public Contact saveContact(Contact contact) {

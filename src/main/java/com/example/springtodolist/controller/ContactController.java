@@ -21,7 +21,7 @@ public class ContactController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Contact> findByNumber(@PathVariable long id) {
+    public Contact findById(@PathVariable long id) {
         return service.findById(id);
     }
 

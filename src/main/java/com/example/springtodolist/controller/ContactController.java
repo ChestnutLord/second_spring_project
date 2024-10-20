@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/contacts")
@@ -15,28 +16,28 @@ public class ContactController {
     private final ContactService service;
 
     @GetMapping
-    public List<Contact> getAllTasks() {
-        return service.getAllContacts();
+    public List<Contact> getAllContacts() {
+        return service.findAllContacts();
     }
 
-    @GetMapping("/{number}")
-    public Contact findByNumber(@PathVariable String number) {
-        return service.getByNumber(number);
+    @GetMapping("/{id}")
+    public Contact findById(@PathVariable long id) {
+        return service.findById(id);
     }
 
-    @PostMapping("save_contact")
+    @PostMapping
     public Contact saveContact(@RequestBody Contact contact) {
         return service.saveContact(contact);
     }
 
-    @PutMapping("update_contact")
-    public Contact updateContact(@RequestBody Contact contact) {
-        return service.updateContact(contact);
+    @PutMapping("/{id}")
+    public Contact updateContact(@PathVariable long id, @RequestBody Contact contact) {
+        return service.updateContact(id, contact);
     }
 
-    @DeleteMapping("delete_contact/{number}")
-    public void deleteContact(@PathVariable String number) {
-        service.deleteContact(number);
+    @DeleteMapping("/{id}")
+    public void deleteContact(@PathVariable long id) {
+        service.deleteContact(id);
     }
 
 }

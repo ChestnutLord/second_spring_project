@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public class InMemoryContactRepository implements ContactRepository {
-    private long id=0;
+    private long id = 0;
     private final List<Contact> contacts = new ArrayList<>();
 
     @Override
@@ -19,10 +19,22 @@ public class InMemoryContactRepository implements ContactRepository {
 
     @Override
     public Contact save(Contact contact) {
-        id++;
-        contact.setId(id);
-        contacts.add(contact);
-        return contact;
+        if (contacts.stream()
+                .anyMatch(c -> c.getId().equals(contact.getId()))) {
+            Optional<Contact> existingContact = contacts.stream()
+                    .filter(c -> c.getId().equals(contact.getId()))
+                    .findFirst();
+            Contact updateContact = existingContact.get();
+            updateContact.setName(contact.getName());
+            updateContact.setNumber(contact.getNumber());
+            updateContact.setAddress(contact.getAddress());
+            return updateContact;
+        } else {
+            id++;
+            contact.setId(id);
+            contacts.add(contact);
+            return contact;
+        }
     }
 
 

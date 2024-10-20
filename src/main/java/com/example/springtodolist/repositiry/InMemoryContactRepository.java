@@ -19,12 +19,8 @@ public class InMemoryContactRepository implements ContactRepository {
 
     @Override
     public Contact save(Contact contact) {
-        if (contacts.stream()
-                .anyMatch(c -> c.getId().equals(contact.getId()))) {
-            Optional<Contact> existingContact = contacts.stream()
-                    .filter(c -> c.getId().equals(contact.getId()))
-                    .findFirst();
-            Contact updateContact = existingContact.get();
+        if (contact.getId()!=0) {
+            Contact updateContact = findById(contact.getId()).get();
             updateContact.setName(contact.getName());
             updateContact.setNumber(contact.getNumber());
             updateContact.setAddress(contact.getAddress());

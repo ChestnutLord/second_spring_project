@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Primary //TODO use from profiles
+@Primary //TODO use from profiles пока висит
 @Repository
 public interface DBContactRepository extends JpaRepository<Contact, Long>, ContactRepository {
 

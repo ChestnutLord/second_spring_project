@@ -40,8 +40,6 @@ public class ContactService {
                 .orElseThrow(() -> new EntityNotFoundException("Contact not found with id " + id));
     }
 
-    @Transactional
-    // без аннотации не работалло
     public void deleteContact(long id) {
         repository.deleteById(id);
     }

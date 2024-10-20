@@ -19,18 +19,18 @@ public class InMemoryContactRepository implements ContactRepository {
 
     @Override
     public Contact save(Contact contact) {
-        if (contact.getId()!=0) {
+        if (contact.getId() <= 0) {
             Contact updateContact = findById(contact.getId()).get();
             updateContact.setName(contact.getName());
             updateContact.setNumber(contact.getNumber());
             updateContact.setAddress(contact.getAddress());
             return updateContact;
-        } else {
-            id++;
-            contact.setId(id);
-            contacts.add(contact);
-            return contact;
         }
+        id++;
+        contact.setId(id);
+        contacts.add(contact);
+        return contact;
+
     }
 
     @Override

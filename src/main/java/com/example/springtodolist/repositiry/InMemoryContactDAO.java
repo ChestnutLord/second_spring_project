@@ -18,24 +18,24 @@ public class InMemoryContactDAO {
 
     private ContactMapper contactMapper;
 
-    public ListDTO<Contact> getAllContact() {
+    public List<Contact> getAllContact() {
         return CONTACTS;
     }
 
-    public ContactDTO findByNumber(String number) {
+    public Contact findByNumber(String number) {
         return CONTACTS.stream().
                 filter(element -> element.getNumber().equals(number))
                 .findFirst()
                 .orElse(null);
     }
 
-    public Contact saveContact(ContactDTO contactDto) {
-        CONTACTS.add(contactDto);
+    public Contact saveContact(Contact contact) {
+        CONTACTS.add(contact);
         System.out.println("Контакт добвавлен");
         return contact;
     }
 
-    public Contact updateContact(ContactDTO contactDto) {
+    public Contact updateContact(Contact contact) {
         var contactIndex = IntStream.range(0, CONTACTS.size())
                 .filter(index -> CONTACTS.get(index).getId().equals(contact.getId()))
                 .findFirst()

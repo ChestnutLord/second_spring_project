@@ -1,6 +1,5 @@
 package com.example.springtodolist.service;
 
-import com.example.springtodolist.dto.ContactDTO;
 import com.example.springtodolist.model.Contact;
 
 import java.util.List;
@@ -11,9 +10,9 @@ public interface ContactService {
 
     Contact getByNumber(String number);
 
-    Contact saveContact(ContactDTO contactDto);
+    Contact saveContact(Contact contact);
 
-    Contact updateContact(ContactDTO contactDto);
+    Contact updateContact(Contact contact);
 
     void deleteContact(String number);
 

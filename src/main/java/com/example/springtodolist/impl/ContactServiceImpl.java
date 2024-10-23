@@ -1,6 +1,5 @@
 package com.example.springtodolist.impl;
 
-import com.example.springtodolist.dto.ContactDTO;
 import com.example.springtodolist.model.Contact;
 import com.example.springtodolist.repositiry.ContactRepository;
 import com.example.springtodolist.service.ContactService;
@@ -30,13 +29,13 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact saveContact(ContactDTO contact) {
+    public Contact saveContact(Contact contact) {
         return repository.save(contact);
     }
 
     @Override
-    public Contact updateContact(ContactDTO contactDto) {
-        return repository.save(contactDto);
+    public Contact updateContact(Contact contact) {
+        return repository.save(contact);
     }
 
     @Override

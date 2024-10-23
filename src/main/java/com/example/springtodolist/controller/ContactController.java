@@ -1,5 +1,7 @@
 package com.example.springtodolist.controller;
 
+import com.example.springtodolist.dto.ContactDTO;
+import com.example.springtodolist.mapper.ContactMapper;
 import com.example.springtodolist.model.Contact;
 import com.example.springtodolist.service.ContactService;
 import lombok.AllArgsConstructor;
@@ -14,24 +16,26 @@ public class ContactController {
 
     private final ContactService service;
 
+    private ContactMapper contactMapper;
+
     @GetMapping
-    public List<Contact> getAllTasks() {
-        return service.getAllContacts();
+    public List<ContactDTO> getAllTasks() {
+        return contactMapper.toDTOList(service.getAllContacts());
     }
 
     @GetMapping("/{number}")
-    public Contact findByNumber(@PathVariable String number) {
-        return service.getByNumber(number);
+    public ContactDTO findByNumber(@PathVariable String number) {
+        return contactMapper.toContactDto(service.getByNumber(number));
     }
 
     @PostMapping("save_contact")
-    public Contact saveContact(@RequestBody Contact contact) {
-        return service.saveContact(contact);
+    public Contact saveContact(@RequestBody ContactDTO contactDto) {
+        return service.saveContact(contactMapper.toContact(contactDto));
     }
 
     @PutMapping("update_contact")
-    public Contact updateContact(@RequestBody Contact contact) {
-        return service.updateContact(contact);
+    public Contact updateContact(@RequestBody ContactDTO contactDto) {
+        return service.updateContact(contactMapper.toContact(contactDto));
     }
 
     @DeleteMapping("delete_contact/{number}")

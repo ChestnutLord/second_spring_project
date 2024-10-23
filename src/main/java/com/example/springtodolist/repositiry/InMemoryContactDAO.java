@@ -1,6 +1,9 @@
 package com.example.springtodolist.repositiry;
 
+import com.example.springtodolist.dto.ContactDTO;
+import com.example.springtodolist.mapper.ContactMapper;
 import com.example.springtodolist.model.Contact;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,28 +11,31 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Repository
+@AllArgsConstructor
 public class InMemoryContactDAO {
 
     private final List<Contact> CONTACTS = new ArrayList<>();
 
-    public List<Contact> getAllContact() {
+    private ContactMapper contactMapper;
+
+    public ListDTO<Contact> getAllContact() {
         return CONTACTS;
     }
 
-    public Contact findByNumber(String number) {
+    public ContactDTO findByNumber(String number) {
         return CONTACTS.stream().
                 filter(element -> element.getNumber().equals(number))
                 .findFirst()
                 .orElse(null);
     }
 
-    public Contact saveContact(Contact contact) {
-        CONTACTS.add(contact);
+    public Contact saveContact(ContactDTO contactDto) {
+        CONTACTS.add(contactDto);
         System.out.println("Контакт добвавлен");
         return contact;
     }
 
-    public Contact updateContact(Contact contact) {
+    public Contact updateContact(ContactDTO contactDto) {
         var contactIndex = IntStream.range(0, CONTACTS.size())
                 .filter(index -> CONTACTS.get(index).getId().equals(contact.getId()))
                 .findFirst()

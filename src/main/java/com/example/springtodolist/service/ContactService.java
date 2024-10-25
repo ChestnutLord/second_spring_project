@@ -1,6 +1,9 @@
 package com.example.springtodolist.service;
 
 import com.example.springtodolist.model.Contact;
+import com.example.springtodolist.repositiry.ContactRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

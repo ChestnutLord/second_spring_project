@@ -1,7 +1,5 @@
 package com.example.springtodolist.controller;
 
-import com.example.springtodolist.dto.ContactDTO;
-import com.example.springtodolist.mapper.ContactMapper;
 import com.example.springtodolist.model.Contact;
 import com.example.springtodolist.service.ContactService;
 import lombok.AllArgsConstructor;
@@ -19,28 +17,28 @@ public class ContactController {
     private ContactMapper contactMapper;
 
     @GetMapping
-    public List<ContactDTO> getAllTasks() {
-        return contactMapper.toDTOList(service.getAllContacts());
+    public List<Contact> getAllContacts() {
+        return service.findAllContacts();
     }
 
-    @GetMapping("/{number}")
-    public ContactDTO findByNumber(@PathVariable String number) {
-        return contactMapper.toContactDto(service.getByNumber(number));
+    @GetMapping("/{id}")
+    public Contact findById(@PathVariable long id) {
+        return service.findById(id);
     }
 
-    @PostMapping("save_contact")
-    public Contact saveContact(@RequestBody ContactDTO contactDto) {
-        return service.saveContact(contactMapper.toContact(contactDto));
+    @PostMapping
+    public Contact saveContact(@RequestBody Contact contact) {
+        return service.saveContact(contact);
     }
 
-    @PutMapping("update_contact")
-    public Contact updateContact(@RequestBody ContactDTO contactDto) {
-        return service.updateContact(contactMapper.toContact(contactDto));
+    @PutMapping("/{id}")
+    public Contact updateContact(@PathVariable long id, @RequestBody Contact contact) {
+        return service.updateContact(id, contact);
     }
 
-    @DeleteMapping("delete_contact/{number}")
-    public void deleteContact(@PathVariable String number) {
-        service.deleteContact(number);
+    @DeleteMapping("/{id}")
+    public void deleteContact(@PathVariable long id) {
+        service.deleteContact(id);
     }
 
 }

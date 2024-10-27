@@ -1,9 +1,6 @@
 package com.example.springtodolist.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity

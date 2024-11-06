@@ -17,7 +17,6 @@ public class ContactDTO {
 
     private String name;
 
-    @Column(unique = true)
     private String number;
 
     private String address;

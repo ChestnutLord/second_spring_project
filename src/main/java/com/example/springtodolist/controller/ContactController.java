@@ -29,13 +29,14 @@ public class ContactController {
     }
 
     @PostMapping
-    public ContactDTO saveContact(@RequestBody Contact contact) {
-        return contactMapper.toContactDto(service.saveContact(contact));
+    public ContactDTO saveContact(@RequestBody ContactDTO contact) {
+        return contactMapper.toContactDto(service.saveContact(contactMapper.toContact(contact)));
+        //return contactMapper.toContactDto(service.saveContact(contact));
     }
 
     @PutMapping("/{id}")
-    public ContactDTO updateContact(@PathVariable long id, @RequestBody Contact contact) {
-        return contactMapper.toContactDto(service.updateContact(id, contact));
+    public ContactDTO updateContact(@PathVariable long id, @RequestBody ContactDTO contact) {
+        return contactMapper.toContactDto(service.updateContact(id, contactMapper.toContact(contact)));
     }
 
     @DeleteMapping("/{id}")
